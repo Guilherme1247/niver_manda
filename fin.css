@@ -1,0 +1,560 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #2d1b69 0%, #11001c 50%, #0f0f23 100%);
+    min-height: 100vh;
+    padding: 20px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(20, 20, 40, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+    border: 2px solid #8a2be2;
+    transition: all 0.3s ease;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #ff6b9d;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(138, 43, 226, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 2px 2px 8px rgba(138, 43, 226, 0.5); }
+    to { text-shadow: 2px 2px 20px rgba(138, 43, 226, 0.8), 0 0 30px rgba(255, 107, 157, 0.5); }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+.game-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 15px;
+    border: 1px solid #8a2be2;
+}
+
+#game-counter {
+    font-weight: bold;
+    color: #ff6b9d;
+    font-size: 1.1em;
+}
+
+.game {
+    display: none;
+    padding: 30px;
+    background: rgba(30, 30, 60, 0.9);
+    border-radius: 15px;
+    border: 3px solid #8a2be2;
+    text-align: center;
+    min-height: 400px;
+    box-shadow: inset 0 0 20px rgba(138, 43, 226, 0.2);
+}
+
+.game.active {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.game h2 {
+    color: #ff6b9d;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-description {
+    color: #ccc;
+    margin-bottom: 30px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+.game-area {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    background: linear-gradient(45deg, #8a2be2, #4b0082);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    margin: 5px;
+    border: 1px solid #ff6b9d;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+    background: linear-gradient(45deg, #9932cc, #8a2be2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Brincadeira 1: Botão Teletransporte */
+.teleport-area {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 15px;
+    border: 2px solid #8a2be2;
+    overflow: hidden;
+}
+
+.teleport-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ghostFloat 2s ease-in-out infinite;
+    transition: all 0.5s ease;
+}
+
+@keyframes ghostFloat {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+    50% { transform: translate(-50%, -50%) translateY(-10px); }
+}
+
+.teleport-btn.teleporting {
+    animation: teleportEffect 0.8s ease;
+}
+
+@keyframes teleportEffect {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Brincadeira 2: Caça aos Fantasmas */
+.ghost-hunt-area {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 15px;
+    border: 2px solid #8a2be2;
+    overflow: hidden;
+}
+
+.hidden-ghost {
+    position: absolute;
+    font-size: 2em;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    animation: ghostPeek 3s ease-in-out infinite;
+}
+
+@keyframes ghostPeek {
+    0%, 90%, 100% { opacity: 0.3; }
+    5%, 85% { opacity: 0.8; }
+}
+
+.hidden-ghost:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.hidden-ghost.found {
+    animation: ghostCaught 0.5s ease;
+    opacity: 1;
+}
+
+@keyframes ghostCaught {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5) rotate(360deg); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.hunt-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: #ff6b9d;
+    font-weight: bold;
+}
+
+/* Brincadeira 3: Ritual de Invocação */
+.ritual-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.candle {
+    font-size: 3em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.candle:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.candle.lit {
+    opacity: 1;
+    filter: grayscale(0%);
+    animation: candleFlicker 1s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgba(255, 165, 0, 0.8);
+}
+
+@keyframes candleFlicker {
+    0% { text-shadow: 0 0 20px rgba(255, 165, 0, 0.8); }
+    100% { text-shadow: 0 0 30px rgba(255, 165, 0, 1), 0 0 40px rgba(255, 107, 157, 0.5); }
+}
+
+.ritual-instructions {
+    color: #ccc;
+    margin: 20px 0;
+}
+
+.ritual-instructions p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+#ritual-sequence {
+    color: #ff6b9d;
+    font-weight: bold;
+}
+
+/* Brincadeira 4: Portal Dimensional */
+.portal-area {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background: rgba(138, 43, 226, 0.1);
+    border-radius: 15px;
+    border: 2px solid #8a2be2;
+    overflow: hidden;
+}
+
+.portal {
+    position: absolute;
+    font-size: 4em;
+    cursor: pointer;
+    animation: portalSpin 3s linear infinite, portalPulse 2s ease-in-out infinite alternate;
+    transition: all 0.5s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes portalSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes portalPulse {
+    0% { filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.5)); }
+    100% { filter: drop-shadow(0 0 30px rgba(255, 107, 157, 0.8)); }
+}
+
+.portal.teleporting {
+    animation: portalTeleport 1s ease;
+}
+
+@keyframes portalTeleport {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.portal-stats {
+    color: #ff6b9d;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Brincadeira 5: Espelho Mágico */
+.mirror-container {
+    margin: 20px 0;
+}
+
+.magic-mirror {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    background: linear-gradient(135deg, #333, #666);
+    border-radius: 20px;
+    border: 5px solid #8a2be2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magic-mirror:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
+}
+
+.mirror-surface {
+    font-size: 4em;
+    position: relative;
+    z-index: 2;
+}
+
+.mirror-reflection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+.mirror-reflection.showing {
+    opacity: 1;
+    animation: reflectionAppear 1s ease;
+}
+
+@keyframes reflectionAppear {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.mirror-stats {
+    color: #ff6b9d;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Mensagem Final */
+.final-message {
+    min-height: 500px;
+}
+
+.dark-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid #8a2be2;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4), inset 0 0 50px rgba(255, 107, 157, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.dark-card h3 {
+    color: #ff6b9d;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(138, 43, 226, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.message-text {
+    text-align: left;
+    color: #ddd;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.message-text p {
+    margin-bottom: 15px;
+}
+
+.dark-wishes-list {
+    background: rgba(138, 43, 226, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: left;
+    border: 1px solid #8a2be2;
+}
+
+.dark-wishes-list li {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+    color: #fff;
+}
+
+.final-wish {
+    font-weight: bold;
+    color: #ff6b9d;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.ritual-btn {
+    background: linear-gradient(45deg, #8a2be2, #ff6b9d);
+    font-size: 1.3em;
+    padding: 20px 40px;
+    margin-top: 20px;
+    animation: ritualPulse 2s ease-in-out infinite;
+    border: 2px solid #ff6b9d;
+}
+
+@keyframes ritualPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    }
+    50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+    }
+}
+
+.final-ritual {
+    margin-top: 20px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #ff6b9d;
+}
+
+.game-result {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 10px;
+    font-size: 1.2em;
+    color: #fff;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #8a2be2;
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.1em;
+    color: #ccc;
+    font-style: italic;
+}
+
+.bounce {
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    80% { transform: translateY(-7px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.pulse {
+    animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .title {
+        font-size: 2em;
+    }
+    
+    .game {
+        padding: 20px;
+        min-height: 350px;
+    }
+    
+    .teleport-area, .ghost-hunt-area, .portal-area {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .ritual-circle {
+        gap: 15px;
+    }
+    
+    .candle {
+        font-size: 2em;
+    }
+    
+    .dark-card {
+        padding: 20px;
+    }
+    
+    .dark-card h3 {
+        font-size: 1.5em;
+    }
+    
+    button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}

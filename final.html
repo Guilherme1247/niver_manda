@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Feliz Aniversário Prima Assombrada! 👻</title>
+    <link rel="stylesheet" href="fin.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">🎃 Feliz Aniversário Prima! 👻</h1>
+            <p class="subtitle">Brincadeiras sobrenaturais para a rainha do terror!</p>
+        </header>
+
+        <!-- Navegação das Brincadeiras -->
+        <div class="game-navigation">
+            <button onclick="previousGame()" id="prev-btn">⬅️ Anterior</button>
+            <span id="game-counter">Brincadeira 1 de 6</span>
+            <button onclick="nextGame()" id="next-btn">Próxima ➡️</button>
+        </div>
+
+        <!-- Brincadeira 1: Botão Teletransporte -->
+        <section class="game active" id="game-1">
+            <h2>🌀 Botão Fantasma Teletransportador!</h2>
+            <p class="game-description">Este botão está possuído e se teletransporta! Tente pegá-lo... se conseguir!</p>
+            <div class="game-area">
+                <div class="teleport-area" id="teleport-area">
+                    <button class="teleport-btn" id="teleport-btn" onclick="catchTeleportButton()">👻 Me Pegue!</button>
+                </div>
+                <div id="teleport-result" class="game-result"></div>
+            </div>
+        </section>
+
+        <!-- Brincadeira 2: Caça aos Fantasmas -->
+        <section class="game" id="game-2">
+            <h2>👻 Caça aos Fantasmas Escondidos!</h2>
+            <p class="game-description">Encontre todos os fantasmas escondidos! Eles estão se escondendo da sua beleza assombrosamente incrível!</p>
+            <div class="game-area">
+                <div class="ghost-hunt-area" id="ghost-hunt-area">
+                    <!-- Fantasmas serão gerados aqui -->
+                </div>
+                <div class="hunt-stats">
+                    <span id="ghosts-found">Fantasmas encontrados: 0/5</span>
+                    <button onclick="startGhostHunt()">🔍 Começar Caçada!</button>
+                </div>
+                <div id="ghost-hunt-result" class="game-result"></div>
+            </div>
+        </section>
+
+        <!-- Brincadeira 3: Ritual de Invocação -->
+        <section class="game" id="game-3">
+            <h2>🕯️ Ritual de Invocação Mágica!</h2>
+            <p class="game-description">Clique nas velas na ordem certa para invocar uma surpresa especial!</p>
+            <div class="game-area">
+                <div class="ritual-circle">
+                    <div class="candle" id="candle-1" onclick="lightCandle(1)">🕯️</div>
+                    <div class="candle" id="candle-2" onclick="lightCandle(2)">🕯️</div>
+                    <div class="candle" id="candle-3" onclick="lightCandle(3)">🕯️</div>
+                    <div class="candle" id="candle-4" onclick="lightCandle(4)">🕯️</div>
+                    <div class="candle" id="candle-5" onclick="lightCandle(5)">🕯️</div>
+                </div>
+                <div class="ritual-instructions">
+                    <p>Sequência: <span id="ritual-sequence">? ? ? ? ?</span></p>
+                    <button onclick="startRitual()">🔮 Iniciar Ritual!</button>
+                </div>
+                <div id="ritual-result" class="game-result"></div>
+            </div>
+        </section>
+
+        <!-- Brincadeira 4: Portal Dimensional -->
+        <section class="game" id="game-4">
+            <h2>🌀 Portal Dimensional Instável!</h2>
+            <p class="game-description">O portal muda de lugar a cada clique! Atravesse-o 7 vezes para descobrir o segredo!</p>
+            <div class="game-area">
+                <div class="portal-area" id="portal-area">
+                    <div class="portal" id="portal" onclick="enterPortal()">🌀</div>
+                </div>
+                <div class="portal-stats">
+                    <span id="portal-count">Portais atravessados: 0/7</span>
+                </div>
+                <div id="portal-result" class="game-result"></div>
+            </div>
+        </section>
+
+        <!-- Brincadeira 5: Espelho Mágico -->
+        <section class="game" id="game-5">
+            <h2>�mirror Espelho Mágico Assombrado!</h2>
+            <p class="game-description">Clique no espelho para ver reflexos mágicos! Cada clique revela algo especial sobre você!</p>
+            <div class="game-area">
+                <div class="mirror-container">
+                    <div class="magic-mirror" id="magic-mirror" onclick="lookInMirror()">
+                        <div class="mirror-surface">🪞</div>
+                        <div class="mirror-reflection" id="mirror-reflection"></div>
+                    </div>
+                </div>
+                <div class="mirror-stats">
+                    <span id="mirror-count">Reflexões vistas: 0</span>
+                </div>
+                <div id="mirror-result" class="game-result"></div>
+            </div>
+        </section>
+
+        <!-- Mensagem Final Especial -->
+        <section class="game" id="game-6">
+            <h2>🎃 Feliz Aniversário Manda! 💀</h2>
+            <div class="game-area final-message">
+                <div class="dark-card">
+                    <div class="card-content">
+                        <h3>🎂 parabens PRIMA ! 👻</h3>
+                        <div class="message-text">
+                            <p>Do fundo do meu coração, eu envio os mais brilhantes desejos para você!</p>
+                            <p>Você é mais incrível do que todos os fogos de artifício juntos! ✨</p>
+                            <p>Que este novo ano da sua vida seja repleto de:</p>
+                            <ul class="celebration-wishes-list">
+                                <li>🎈 Momentos tão leves e felizes como balões coloridos</li>
+                                <li>🍰 Doces surpresas e muitas razões para sorrir</li>
+                                <li>🌞 Dias tão brilhantes quanto seu coração</li>
+                                <li>💫 Energia positiva para realizar todos seus sonhos</li>
+                                <li>🎉 Festas inesquecíveis com quem você ama</li>
+                            </ul>
+                            <p>Você tem o dom de transformar dias comuns em dias especiais!</p>
+                            <p class="final-wish">Feliz Aniversário, e parabens 🌅💖</p>
+                        </div>
+                        <button class="ritual-btn" onclick="finalRitual()">🕯️ INICIAR RITUAL DE CELEBRAÇÃO! 🕯️</button>
+                        <div id="final-ritual" class="final-ritual"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="footer-text">Que seu dia seja perfeito! 🌙✨</p>
+        </footer>
+    </div>
+
+    <script src="fin.js"></script>
+</body>
+</html>
